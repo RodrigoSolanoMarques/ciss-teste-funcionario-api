@@ -1,0 +1,10 @@
+CREATE TABLE funcionario
+(
+    id   BIGINT(10) PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(30) NOT NULL,
+    sobrenome VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    nis_pis VARCHAR(15) NOT NULL,
+    UNIQUE (nome)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
