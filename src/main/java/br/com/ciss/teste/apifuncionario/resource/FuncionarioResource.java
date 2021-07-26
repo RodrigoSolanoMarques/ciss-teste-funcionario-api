@@ -3,6 +3,8 @@ package br.com.ciss.teste.apifuncionario.resource;
 import br.com.ciss.teste.apifuncionario.model.Funcionario;
 import br.com.ciss.teste.apifuncionario.repository.FuncionarioRepository;
 import br.com.ciss.teste.apifuncionario.service.FuncionarioService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
+@Api(value = "Funcionario")
 @RequestMapping("/funcionarios")
 public class FuncionarioResource {
 
@@ -23,11 +26,13 @@ public class FuncionarioResource {
     @Autowired
     private FuncionarioService service;
 
+    @ApiOperation(value = "Mostra lista de funcionarios")
     @GetMapping
     public List<Funcionario> listar() {
         return repository.findAll();
     }
 
+    @ApiOperation(value = "Cria um funcionario")
     @PostMapping
     public ResponseEntity<Funcionario> criar(@Valid @RequestBody Funcionario funcionario) {
 
@@ -42,6 +47,7 @@ public class FuncionarioResource {
         return ResponseEntity.created(uri).body(funcionarioCriado);
     }
 
+    @ApiOperation(value = "Busca um funcionario pelo ID")
     @GetMapping("/{id}")
     public ResponseEntity<Funcionario> buscarPeloId(@PathVariable Long id) {
         return repository.findById(id)
@@ -49,6 +55,15 @@ public class FuncionarioResource {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @ApiOperation(value = "Busca um funcionario pelo NIS/PIS")
+    @GetMapping("/nispis/{nisPis}")
+    public ResponseEntity<Funcionario> buscarPeloNisPis(@PathVariable String nisPis) {
+        return repository.findByNisPis(nisPis)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @ApiOperation(value = "Atualiza um funcionario")
     @PutMapping("/{id}")
     public ResponseEntity<Funcionario> atualizar(
             @PathVariable Long id,
@@ -58,6 +73,7 @@ public class FuncionarioResource {
         return ResponseEntity.ok(funcionarioSalvo);
     }
 
+    @ApiOperation(value = "Remove um funcionario")
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void remover(@PathVariable Long id) {
