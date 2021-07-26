@@ -28,7 +28,6 @@ public class Funcionario {
     @Email(message = "Endereço de e-mail enviado em um formato inválido.")
     private String email;
 
-    @CPF
     @Pattern(regexp = "([0-9]{11})", message = "{funcionario.nis_pis.invalid}")
     @NotNull(message = "O NIS/PIS é obrigatório")
     @Column(unique = true)
