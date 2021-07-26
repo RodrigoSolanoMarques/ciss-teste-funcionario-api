@@ -4,6 +4,7 @@ import br.com.ciss.teste.apifuncionario.model.Funcionario;
 import br.com.ciss.teste.apifuncionario.repository.FuncionarioRepository;
 import br.com.ciss.teste.apifuncionario.service.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -55,5 +56,11 @@ public class FuncionarioResource {
 
         Funcionario funcionarioSalvo = service.atualizar(id, funcionario);
         return ResponseEntity.ok(funcionarioSalvo);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void remover(@PathVariable Long id) {
+        repository.deleteById(id);
     }
 }
