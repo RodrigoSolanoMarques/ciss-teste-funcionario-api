@@ -1,7 +1,5 @@
 package br.com.ciss.teste.apifuncionario.model;
 
-import org.hibernate.validator.constraints.br.CPF;
-
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.Objects;
@@ -30,8 +28,8 @@ public class Funcionario {
 
     @Pattern(regexp = "([0-9]{11})", message = "{funcionario.nis_pis.invalid}")
     @NotNull(message = "O NIS/PIS é obrigatório")
-    @Column(unique = true)
-    private String nis_pis;
+    @Column(name = "nis_pis", unique = true)
+    private String nisPis;
 
     public Long getId() {
         return id;
@@ -65,12 +63,12 @@ public class Funcionario {
         this.email = email;
     }
 
-    public String getNis_pis() {
-        return nis_pis;
+    public String getNisPis() {
+        return nisPis;
     }
 
-    public void setNis_pis(String nis_pis) {
-        this.nis_pis = nis_pis;
+    public void setNisPis(String nis_pis) {
+        this.nisPis = nis_pis;
     }
 
     @Override

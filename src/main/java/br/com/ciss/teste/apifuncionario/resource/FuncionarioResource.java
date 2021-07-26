@@ -6,8 +6,10 @@ import br.com.ciss.teste.apifuncionario.service.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -23,6 +25,20 @@ public class FuncionarioResource {
     @GetMapping
     public List<Funcionario> listar() {
         return repository.findAll();
+    }
+
+    @PostMapping
+    public ResponseEntity<Funcionario> criar(@Valid @RequestBody Funcionario funcionario) {
+
+        Funcionario funcionarioCriado = service.savar(funcionario);
+
+        URI uri = ServletUriComponentsBuilder
+                .fromCurrentRequestUri()
+                .path("/{id}")
+                .buildAndExpand(funcionarioCriado.getId())
+                .toUri();
+
+        return ResponseEntity.created(uri).body(funcionarioCriado);
     }
 
     @GetMapping("/{id}")

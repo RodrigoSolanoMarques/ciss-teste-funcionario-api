@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>br.com.ciss.teste</groupId>
 	<artifactId>api-funcionario</artifactId>
-	<version>0.0.2</version>
+	<version>0.0.3</version>
 	<name>API - Funcionario</name>
 	<description>API desenvolvida para o teste da CISS</description>
 	<properties>
