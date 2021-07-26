@@ -16,7 +16,7 @@
 
 	<groupId>br.com.ciss.teste</groupId>
 	<artifactId>api-funcionario</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 
 	<properties>
 		<java.version>11</java.version>
